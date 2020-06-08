@@ -7,7 +7,7 @@ Código limpo e funcional utilizando refatoração; aplicado tanto no *Front-end
 Aplicação web dinâmica, criação de um servidor e utilização de banco de dados: uma ampla base de um *Full Stack Developer*.
 
 
-#####Aplicabilidade
+Aplicabilidade
 + Programação
     + Algoritmos
     + Lógica de Programação
@@ -37,4 +37,4 @@ Para melhor utilização, instalado o plugin [JSON Formatter](https://chrome.goo
 ------------
 
 Aprender sempre. Evoluir constantemente 🚀
-End
+
