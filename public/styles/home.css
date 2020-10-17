@@ -1,5 +1,5 @@
 #page-home {    
-    background: url(/icones/home-background.svg) no-repeat;
+    background: url("/public/icones/home-background.svg") no-repeat;
     height: 100vh;
     background-position: 35vw bottom;    
 }
@@ -15,8 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 48px;
-    
+    margin-top: 48px;    
 }
 #page-home header a {
     display: flex;    
@@ -24,7 +23,7 @@
     color: var(--title-color);   
 }
 #page-home header a span {    
-    background-image: url(/icones/log-in.svg);
+    background-image: url("/public/icones/log-in.svg");
     width: 20px;
     height: 20px;
     margin-right: 16px;
@@ -74,7 +73,7 @@
 }
 #page-home main a span::after{
     content: "";
-    background-image: url(/icones/search.svg);
+    background-image: url("/public/icones/search.svg");
     width: 20px;
     height: 20px;    
 }

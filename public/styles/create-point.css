@@ -16,7 +16,7 @@
     align-items: center;
 }
 #page-create-point header a span {
-    background-image: url(/icones/arrow-left.svg);
+    background-image: url("/public/icones/arrow-left.svg");
     width: 20px;
     height: 24px;
     display: flex;

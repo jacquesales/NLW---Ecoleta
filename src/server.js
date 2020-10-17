@@ -1,31 +1,28 @@
-const express = require('express')
-const server = express()
+const express = require("express");
+const server = express();
 
-const db = require('./database/db.js')
+const db = require("./database/db");
 
-server.use(express.static('public'))
+server.use(express.static("public"));
 
-server.use(express.urlencoded({extended: true})) // habilita uso do req.body
+server.use(express.urlencoded({extended: true})); // habilita uso do req.body
 
 
-const nunjucks = require('nunjucks')
-nunjucks.configure('src/views', {
+const nunjucks = require("nunjucks");
+nunjucks.configure("src/views", {
     express: server,
     noCache: true
-} )
+});
 
-server.get('/', (req, res) => {
-    return res.render('index.html')
-})
-server.get('/create-point', (req, res) => {
-    console.log(req.query)
+server.get("/", (req, res) => {
+    return res.render("index.html", { title: "Um título"});
+});
 
-    return res.render('create-point.html')
-})
+server.get("/create-point", (req, res) => {
+    return res.render("create-point.html");
+});
 
-server.post('/savepoint', (req, res) => {
-    //console.log(req.body)
-
+server.post("/savepoint", (req, res) => {
     const query = `
         INSERT INTO places (
             image,
@@ -49,34 +46,35 @@ server.post('/savepoint', (req, res) => {
 
     function afterInsertData(err) {
         if(err) {
-            return console.log(err)
+            console.log(err)
+            return res.send("Erro no cadastro!")
         }
-        console.log('Cadastrado com sucesso')
-        console.log(this)
 
-        return res.render('create-point.html')
+        console.log("Cadastrado com sucesso")
+        console.log(this)
+        return res.render("create-point.html", {saved: true})
     }
 
-    db.run(query, values, afterInsertData) // incluir dados
-    
-})
+    db.run(query, values, afterInsertData) // incluir dados    
+});
 
-server.get('/search', (req, res) => {
+
+server.get("/search", (req, res) => {
+    const search = req.query.search
+    if(search == "") {
+        return res.render("search-results.html", { total: 0});
+    };
     
-    db.all(`SELECT * FROM places`, function(err, rows) { //puxando os dados do banco de dados
+    db.all(`SELECT * FROM places WHERE city LIKE '%${search}%'`, function(err, rows) { //puxando os dados do banco de dados
         if(err) {
             return console.log(err)
         }
-
         const total = rows.length
-        
-        return res.render('search.html', {places: rows, total: total})
-    })
-    
-})
+        return res.render("search-results.html", { places: rows, total: total});
+    });
+});
 
-server.listen(3000)
-
+server.listen(3000); //configura porta 3000 como sendo responsável para execução do servidor
 
 // rodar o servidor: node start
 // gerar/atualizar o banco de dados: node src/database/db.js

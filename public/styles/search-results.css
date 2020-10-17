@@ -26,7 +26,7 @@ body::after {
     align-items: center;
 }
 #page-search-results header a span {
-    background-image: url(/icones/arrow-left.svg);
+    background-image: url("/public/icones/arrow-left.svg");
     width: 20px;
     height: 24px;
     display: flex;
@@ -42,7 +42,7 @@ main h4 {
 }
 main .cards {
     display: grid;
-    grid-template-columns: 1fr 1fr  1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 24px;
 }
 main img {
