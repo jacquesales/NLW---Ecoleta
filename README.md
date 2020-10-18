@@ -8,7 +8,7 @@ Código limpo e funcional utilizando refatoração; aplicado tanto no *Front-end
 Aplicação dinâmica, roda a partir de um servidor e utiliza banco de dados: uma ampla base de um *Full Stack Developer*.
 
 -------------
-####Pré-requisitos
+**Pré-requisitos**
 
 - [Node.js](https://nodejs.org/en/)
 - [Express](https://expressjs.com/pt-br/starter/installing.html)
@@ -20,7 +20,7 @@ Aplicação dinâmica, roda a partir de um servidor e utiliza banco de dados: um
 
 -------------
 
-#####API de localidade do IBGE:
+####API de localidade do IBGE:
 
 `<estados>` : <https://servicodados.ibge.gov.br/api/v1/localidades/estados>
 
@@ -30,7 +30,7 @@ Para melhor utilização, instalado o plugin [JSON Formatter](https://chrome.goo
 
 -------------
 
-####Aplicabilidade
+**Aplicabilidade**
 + Programação
     + Algoritmos
     + Lógica de Programação
