@@ -1,28 +1,37 @@
 const express = require("express");
 const server = express();
 
+// requisição do BD
 const db = require("./database/db");
 
+// configura os arquivos estáticos
 server.use(express.static("public"));
 
-server.use(express.urlencoded({extended: true})); // habilita uso do req.body
+// habilita uso do req.body
+server.use(express.urlencoded({ extended: true }));
 
-
+// uso do mecanismo de template
 const nunjucks = require("nunjucks");
-nunjucks.configure("src/views", {
+nunjucks.configure("src/views/", {
     express: server,
-    noCache: true
+    noCache: true,
 });
 
+
+// req: resquisição
+// res: resposta
 server.get("/", (req, res) => {
-    return res.render("index.html", { title: "Um título"});
+    return res.render("index.html");
 });
 
 server.get("/create-point", (req, res) => {
+    // console.log(req.query)
+
     return res.render("create-point.html");
 });
 
 server.post("/savepoint", (req, res) => {
+    // inclusão no BD
     const query = `
         INSERT INTO places (
             image,
@@ -33,7 +42,7 @@ server.post("/savepoint", (req, res) => {
             city,
             items
         ) VALUES (?,?,?,?,?,?,?);
-    `
+    `;
     const values = [
         req.body.image,
         req.body.name,
@@ -41,8 +50,8 @@ server.post("/savepoint", (req, res) => {
         req.body.address2,
         req.body.state,
         req.body.city,
-        req.body.items        
-    ]
+        req.body.items,
+    ];
 
     function afterInsertData(err) {
         if(err) {
@@ -64,17 +73,21 @@ server.get("/search", (req, res) => {
     if(search == "") {
         return res.render("search-results.html", { total: 0});
     };
-    
-    db.all(`SELECT * FROM places WHERE city LIKE '%${search}%'`, function(err, rows) { //puxando os dados do banco de dados
+
+
+    db.all(`SELECT * FROM places WHERE city LIKE '%${search}%'`, function(err, rows) { //puxando os dados do BD
         if(err) {
             return console.log(err)
         }
         const total = rows.length
-        return res.render("search-results.html", { places: rows, total: total});
+        return res.render("search-results.html", { 
+            places: rows, 
+            total: rows.length
+        });
     });
 });
 
 server.listen(3000); //configura porta 3000 como sendo responsável para execução do servidor
 
-// rodar o servidor: node start
 // gerar/atualizar o banco de dados: node src/database/db.js
+// rodar o servidor: npm start
